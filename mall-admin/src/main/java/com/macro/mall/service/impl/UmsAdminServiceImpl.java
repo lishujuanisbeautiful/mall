@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.macro.mall.bo.AdminUserDetails;
 import com.macro.mall.common.exception.Asserts;
+import com.macro.mall.common.util.RequestUtil;
 import com.macro.mall.dao.UmsAdminRoleRelationDao;
 import com.macro.mall.dto.UmsAdminParam;
 import com.macro.mall.dto.UpdateAdminPasswordParam;
@@ -37,7 +38,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * UmsAdminService实现类
+ * 后台用户管理Service实现类
  * Created by macro on 2018/4/26.
  */
 @Service
@@ -128,7 +129,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         loginLog.setCreateTime(new Date());
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        loginLog.setIp(request.getRemoteAddr());
+        loginLog.setIp(RequestUtil.getRequestIp(request));
         loginLogMapper.insert(loginLog);
     }
 
